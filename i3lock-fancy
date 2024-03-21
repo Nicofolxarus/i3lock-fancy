@@ -44,7 +44,6 @@ temp="$(getopt -o :hdnpglt:f: -l desktop,help,listfonts,nofork,pixelate,greyscal
 eval set -- "$temp"
 
 # l10n support
-text="Type password to unlock"
 case "${LANG:-}" in
     af_* ) text="Tik wagwoord om te ontsluit" ;; # Afrikaans
     cs_* ) text="Pro odemčení zadajte heslo" ;; # Czech
@@ -53,7 +52,7 @@ case "${LANG:-}" in
     en_* ) text="Type password to unlock" ;; # English
     es_* ) text="Ingrese su contraseña" ;; # Española
     fr_* ) text="Entrez votre mot de passe" ;; # Français
-    he_* ) text="הליענה לטבל המסיס דלקה" ;; # Hebrew עברית (convert doesn't play bidi well)
+    he_* ) text="הקלד סיסמה לביטול הנעילה" ;; # Hebrew עברית
     hi_* ) text="अनलॉक करने के लिए पासवर्ड टाईप करें" ;; #Hindi
     id_* ) text="Masukkan kata sandi Anda" ;; # Bahasa Indonesia
     it_* ) text="Inserisci la password" ;; # Italian
@@ -65,6 +64,7 @@ case "${LANG:-}" in
     sk_* ) text="Pre odomknutie zadajte heslo" ;; # Slovak
     tr_* ) text="Giriş yapmak için şifrenizi girin" ;; # Turkish
     ru_* ) text="Введите пароль" ;; # Russian
+    zh_* ) text="请输入密码以解锁" ;; # Chinese
     * ) text="Type password to unlock" ;; # Default to English
 esac
 
@@ -104,21 +104,21 @@ color=$(convert "$image" -gravity center -crop 100x100+0+0 +repage -colorspace h
 if [[ $color -gt $value ]]; then #white background image and black text
     bw="black"
     icon="/usr/share/i3lock-fancy/icons/lockdark.png"
-    param=("--insidecolor=0000001c" "--ringcolor=0000003e" \
-        "--linecolor=00000000" "--keyhlcolor=ffffff80" "--ringvercolor=ffffff00" \
-        "--separatorcolor=22222260" "--insidevercolor=ffffff1c" \
-        "--ringwrongcolor=ffffff55" "--insidewrongcolor=ffffff1c" \
-        "--verifcolor=ffffff00" "--wrongcolor=ff000000" "--timecolor=ffffff00" \
-        "--datecolor=ffffff00" "--layoutcolor=ffffff00")
+    param=("--inside-color=0000001c" "--ring-color=0000003e" \
+        "--line-color=00000000" "--keyhl-color=ffffff80" "--ringver-color=ffffff00" \
+        "--separator-color=22222260" "--insidever-color=ffffff1c" \
+        "--ringwrong-color=ffffff55" "--insidewrong-color=ffffff1c" \
+        "--verif-color=ffffff00" "--wrong-color=ff000000" "--time-color=ffffff00" \
+        "--date-color=ffffff00" "--layout-color=ffffff00")
 else #black
     bw="white"
     icon="/usr/share/i3lock-fancy/icons/lock.png"
-    param=("--insidecolor=ffffff1c" "--ringcolor=ffffff3e" \
-        "--linecolor=ffffff00" "--keyhlcolor=00000080" "--ringvercolor=00000000" \
-        "--separatorcolor=22222260" "--insidevercolor=0000001c" \
-        "--ringwrongcolor=00000055" "--insidewrongcolor=0000001c" \
-        "--verifcolor=00000000" "--wrongcolor=ff000000" "--timecolor=00000000" \
-        "--datecolor=00000000" "--layoutcolor=00000000")
+    param=("--inside-color=ffffff1c" "--ring-color=ffffff3e" \
+        "--line-color=ffffff00" "--keyhl-color=00000080" "--ringver-color=00000000" \
+        "--separator-color=22222260" "--insidever-color=0000001c" \
+        "--ringwrong-color=00000055" "--insidewrong-color=0000001c" \
+        "--verif-color=00000000" "--wrong-color=ff000000" "--time-color=00000000" \
+        "--date-color=00000000" "--layout-color=00000000")
 fi
 
 LOCK=()
